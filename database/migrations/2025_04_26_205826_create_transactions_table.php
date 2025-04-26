@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('payer')->constrained('users')->onDelete('cascade');
-            $table->foreignId('payee')->constrained('users')->onDelete('cascade');
+            $table->foreignId('payer_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('payee_id')->constrained('users')->onDelete('cascade');
             $table->decimal('value', 10, 2);
             $table->timestamps();
         });

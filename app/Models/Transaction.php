@@ -11,18 +11,18 @@ class Transaction extends Model
     use HasFactory;
 
     protected $fillable = [
-        'payer',
-        'payee',
+        'payer_id',
+        'payee_id',
         'value'
     ];
 
     public function payer(): BelongsTo
     {
-        return $this->belongsTo(user::class, 'payer');
+        return $this->belongsTo(user::class);
     }
 
     public function payee(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'payee');
+        return $this->belongsTo(User::class);
     }
 }
