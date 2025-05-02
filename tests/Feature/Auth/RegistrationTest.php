@@ -14,6 +14,8 @@ test('new users can register', function () {
         'email' => 'test@example.com',
         'password' => 'password',
         'password_confirmation' => 'password',
+        'cpf_cnpj' => '00.000.000/0000-00',
+        'type' => 'merchant'
     ]);
 
     $this->assertAuthenticated();
