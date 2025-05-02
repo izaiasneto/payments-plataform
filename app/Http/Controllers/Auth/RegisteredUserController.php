@@ -40,6 +40,8 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'cpf_cnpj' => $request->cpf_cnpj,
+            'type' => $request->type
         ]);
 
         event(new Registered($user));
