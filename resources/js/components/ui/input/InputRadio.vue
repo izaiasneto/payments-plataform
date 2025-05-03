@@ -4,10 +4,9 @@ import { useVModel } from '@vueuse/core'
 import { cn } from '@/lib/utils'
 
 const props = defineProps<{
-  value: string | number // valor do radio em si
-  modelValue?: string | number // valor que está selecionado
+  value: string | number 
+  modelValue?: string | number
   class?: HTMLAttributes['class']
-  name: string // importante para agrupar rádios
 }>()
 
 const emits = defineEmits<{
@@ -23,7 +22,6 @@ const modelValue = useVModel(props, 'modelValue', emits, {
   <label :class="cn('inline-flex items-center gap-2 cursor-pointer', props.class)">
     <input
       type="radio"
-      :name="name"
       :value="value"
       v-model="modelValue"
       class="h-4 w-4 border-input text-primary focus:ring-2 focus:ring-ring/50 disabled:opacity-50"
