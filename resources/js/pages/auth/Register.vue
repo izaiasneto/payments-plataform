@@ -2,7 +2,7 @@
 import InputError from '@/components/InputError.vue';
 import TextLink from '@/components/TextLink.vue';
 import { Button } from '@/components/ui/button';
-import { Input, InputRadio } from '@/components/ui/input';
+import { Input, InputCheckbox } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AuthBase from '@/layouts/AuthLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
@@ -14,7 +14,7 @@ const form = useForm({
     password: '',
     password_confirmation: '',
     cpf_cnpj: '',
-    type: 'commom',
+    isMerchant: false,
 });
 
 const submit = () => {
@@ -22,6 +22,7 @@ const submit = () => {
         onFinish: () => form.reset('password', 'password_confirmation'),
     });
 };
+
 </script>
 
 <template>
@@ -41,46 +42,7 @@ const submit = () => {
                     <Input id="email" type="email" required :tabindex="2" autocomplete="email" v-model="form.email" placeholder="email@example.com" />
                     <InputError :message="form.errors.email" />
                 </div>
-
-                <div class="grid gap-2">
-                    <Label>Tipo de usuário</Label>
-                    <InputRadio v-model="form.type" name="commom" value="commom">
-                        Comum
-                    </InputRadio>
-                    <InputRadio v-model="form.type" name="merchant" value="merchant">
-                        Lojista
-                    </InputRadio>
-                </div>
-
-                <div v-if="form.type == 'commom'" class="grid gap-2">
-                    <Label for="cpf_cnpj">CPF</Label>
-                    <Input 
-                        id="cpf_cnpj" 
-                        type="cpf_cnpj" 
-                        required 
-                        :tabindex="2" 
-                        autocomplete="cpf_cnpj" 
-                        v-model="form.cpf_cnpj"
-                        v-mask="'###.###.###-##'"
-                        placeholder="000.000.000-00"
-                    />
-                    <InputError :message="form.errors.cpf_cnpj" />
-                </div>
-                <div v-else class="grid gap-2">
-                    <Label for="cpf_cnpj">CNPJ</Label>
-                    <Input 
-                        id="cpf_cnpj" 
-                        type="cpf_cnpj" 
-                        required 
-                        :tabindex="2" 
-                        autocomplete="cpf_cnpj" 
-                        v-model="form.cpf_cnpj"
-                        v-mask="'##.###.###/####-##'"
-                        placeholder="00.000.000/0000-00"
-                    />
-                    <InputError :message="form.errors.cpf_cnpj" />
-                </div>
-
+                
                 <div class="grid gap-2">
                     <Label for="password">Senha</Label>
                     <Input
@@ -107,6 +69,25 @@ const submit = () => {
                         placeholder="Confirmar senha"
                     />
                     <InputError :message="form.errors.password_confirmation" />
+                </div>
+
+                <div class="grid gap-2">
+                    <InputCheckbox v-model="form.isMerchant">Logista</InputCheckbox>
+                </div>
+
+                <div class="grid gap-2">                   
+                    <Label for="cpf_cnpj">{{form.isMerchant ? 'CNPJ' : 'CPF'}}</Label>
+                    <Input 
+                        id="cpf_cnpj" 
+                        type="cpf_cnpj" 
+                        required 
+                        :tabindex="2" 
+                        autocomplete="cpf_cnpj" 
+                        v-model="form.cpf_cnpj"
+                        :v-mask="form.isMerchant ? '##.###.###/####-##' : '###.###.###-##'"
+                        :placeholder="form.isMerchant ? '00.000.000/0000-00' : '000.000.000-00'"
+                    />
+                    <InputError :message="form.errors.cpf_cnpj" />
                 </div>
 
                 <Button type="submit" class="mt-2 w-full" tabindex="5" :disabled="form.processing">
