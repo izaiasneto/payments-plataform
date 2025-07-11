@@ -5,7 +5,7 @@ import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid, TestTubes } from 'lucide-vue-next';
+import { BookOpen, Folder, LayoutGrid, BanknoteIcon } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
 const mainNavItems: NavItem[] = [
@@ -15,9 +15,9 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
     },
     {
-        title: 'Teste',
-        href: '/teste',
-        icon: TestTubes,
+        title: 'Transfer',
+        href: '/transfer',
+        icon: BanknoteIcon,
     },
 ];
 
